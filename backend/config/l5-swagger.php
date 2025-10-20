@@ -10,6 +10,13 @@ return [
                 'description' => 'API for managing cybersecurity tasks with user authentication and JWT security',
             ],
 
+            'servers' => [
+                [
+                    'url' => env('L5_SWAGGER_CONST_HOST', 'http://localhost:8888'),
+                    'description' => 'Development Server',
+                ],
+            ],
+
             'routes' => [
                 /*
                  * Route for accessing api documentation interface
@@ -83,7 +90,7 @@ return [
             /*
              * Absolute path to location where parsed annotations will be stored
              */
-            'docs' => base_path('../docs'),
+            'docs' => base_path('docs'),
 
             /*
              * Absolute path to directory where to export views
@@ -93,7 +100,7 @@ return [
             /*
              * Edit to set the api's base path
              */
-            'base' => env('L5_SWAGGER_BASE_PATH', null),
+            'base' => env('L5_SWAGGER_BASE_PATH', 'http://localhost:8888'),
 
             /*
              * Absolute path to directories that should be excluded from scanning
@@ -314,7 +321,7 @@ return [
          * Constants which can be used in annotations
          */
         'constants' => [
-            'L5_SWAGGER_CONST_HOST' => env('L5_SWAGGER_CONST_HOST', 'http://my-default-host.com'),
+            'L5_SWAGGER_CONST_HOST' => env('L5_SWAGGER_CONST_HOST', 'http://localhost:8888'),
         ],
     ],
 ];

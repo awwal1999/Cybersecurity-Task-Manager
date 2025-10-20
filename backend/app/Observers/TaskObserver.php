@@ -11,7 +11,7 @@ class TaskObserver
      */
     public function created(Task $task): void
     {
-        //
+        $task->recordActivity('Task created');
     }
 
     /**
@@ -19,7 +19,32 @@ class TaskObserver
      */
     public function updated(Task $task): void
     {
-        //
+        // Check if status changed
+        if ($task->isDirty('status')) {
+            $oldStatus = $task->getOriginal('status');
+            $newStatus = $task->status;
+
+            $task->recordActivity(
+                "Task status changed from {$oldStatus} to {$newStatus->value}"
+            );
+        }
+
+        // Check if title or description changed
+        if ($task->isDirty(['title', 'description'])) {
+            $changes = [];
+
+            if ($task->isDirty('title')) {
+                $changes[] = 'title';
+            }
+
+            if ($task->isDirty('description')) {
+                $changes[] = 'description';
+            }
+
+            $task->recordActivity(
+                'Task updated: ' . implode(', ', $changes) . ' modified'
+            );
+        }
     }
 
     /**
@@ -27,7 +52,7 @@ class TaskObserver
      */
     public function deleted(Task $task): void
     {
-        //
+        $task->recordActivity('Task deleted');
     }
 
     /**
@@ -35,7 +60,7 @@ class TaskObserver
      */
     public function restored(Task $task): void
     {
-        //
+        $task->recordActivity('Task restored');
     }
 
     /**

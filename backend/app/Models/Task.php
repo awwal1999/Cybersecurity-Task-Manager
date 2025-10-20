@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Builder;
 
 /**
  * @property int $user_id
+ * @property string $status
  */
 class Task extends Model
 {
