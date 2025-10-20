@@ -1,51 +1,5 @@
 @import "tailwindcss";
 
-:root {
-  --color-primary-50: #e6f1ff;
-  --color-primary-100: #b3d4ff;
-  --color-primary-200: #80b8ff;
-  --color-primary-300: #4d9bff;
-  --color-primary-400: #1a7fff;
-  --color-primary-500: #0062e6;
-  --color-primary-600: #004db3;
-  --color-primary-700: #003880;
-  --color-primary-800: #00234d;
-  --color-primary-900: #000e1a;
-  
-  --color-success-50: #e6f9f0;
-  --color-success-100: #b3efd1;
-  --color-success-200: #80e5b2;
-  --color-success-300: #4ddb93;
-  --color-success-400: #1ad174;
-  --color-success-500: #00b85a;
-  --color-success-600: #008f46;
-  --color-success-700: #006633;
-  --color-success-800: #003d1f;
-  --color-success-900: #00140b;
-  
-  --color-danger-50: #ffe6e6;
-  --color-danger-100: #ffb3b3;
-  --color-danger-200: #ff8080;
-  --color-danger-300: #ff4d4d;
-  --color-danger-400: #ff1a1a;
-  --color-danger-500: #e60000;
-  --color-danger-600: #b30000;
-  --color-danger-700: #800000;
-  --color-danger-800: #4d0000;
-  --color-danger-900: #1a0000;
-  
-  --color-warning-50: #fff9e6;
-  --color-warning-100: #ffedb3;
-  --color-warning-200: #ffe180;
-  --color-warning-300: #ffd54d;
-  --color-warning-400: #ffc91a;
-  --color-warning-500: #e6b000;
-  --color-warning-600: #b38900;
-  --color-warning-700: #806200;
-  --color-warning-800: #4d3b00;
-  --color-warning-900: #1a1400;
-}
-
 @layer base {
   html {
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -58,7 +12,7 @@
 
 @layer components {
   .btn-primary {
-    @apply bg-primary-600 hover:bg-primary-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2;
+    @apply bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2;
   }
   
   .btn-secondary {
@@ -66,15 +20,15 @@
   }
   
   .btn-danger {
-    @apply bg-danger-600 hover:bg-danger-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-danger-500 focus:ring-offset-2;
+    @apply bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2;
   }
   
   .input-field {
-    @apply w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent;
+    @apply w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent;
   }
   
   .input-error {
-    @apply border-danger-500 focus:ring-danger-500;
+    @apply border-red-500 focus:ring-red-500;
   }
   
   .card {
@@ -86,14 +40,14 @@
   }
   
   .status-open {
-    @apply bg-warning-100 text-warning-800;
+    @apply bg-yellow-100 text-yellow-800;
   }
   
   .status-closed {
-    @apply bg-success-100 text-success-800;
+    @apply bg-green-100 text-green-800;
   }
   
   .status-overdue {
-    @apply bg-danger-100 text-danger-800;
+    @apply bg-red-100 text-red-800;
   }
 }
