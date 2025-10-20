@@ -111,14 +111,6 @@ class Task extends Model
     }
 
     /**
-     * Scope a query to only include tasks for a specific user.
-     */
-    public function scopeForUser(Builder $query, int $userId): void
-    {
-        $query->where('user_id', $userId);
-    }
-
-    /**
      * Check if the task is completed.
      */
     public function isCompleted(): bool
