@@ -88,14 +88,14 @@ export const TaskList: React.FC<TaskListProps> = ({
       
       <div className="divide-y divide-gray-200">
         {tasks.map((task) => (
-          <div key={task.id} className="px-6 py-4 hover:bg-gray-50">
-            <div className="flex items-start justify-between">
+          <div key={task.id} className="px-4 sm:px-6 py-4 hover:bg-gray-50">
+            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between">
               <div className="flex-1 min-w-0">
-                <div className="flex items-center space-x-3">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-3 space-y-2 sm:space-y-0">
                   <h3 className="text-sm font-medium text-gray-900 truncate">
                     {task.title}
                   </h3>
-                  <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(task.status)}`}>
+                  <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium w-fit ${getStatusColor(task.status)}`}>
                     {task.status}
                   </span>
                 </div>
@@ -106,38 +106,53 @@ export const TaskList: React.FC<TaskListProps> = ({
                   </p>
                 )}
                 
-                <div className="mt-2 flex items-center space-x-4 text-xs text-gray-500">
-                  <span>Created: {new Date(task.created_at).toLocaleDateString()}</span>
+                <div className="mt-2 flex flex-col sm:flex-row sm:items-center sm:space-x-4 space-y-1 sm:space-y-0 text-xs text-gray-500">
+                  <span className="flex items-center">
+                    <svg className="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Created: {new Date(task.created_at).toLocaleDateString()}
+                  </span>
                   {task.due_date && (
-                    <span>Due: {new Date(task.due_date).toLocaleDateString()}</span>
+                    <span className="flex items-center">
+                      <svg className="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                      </svg>
+                      Due: {new Date(task.due_date).toLocaleDateString()}
+                    </span>
                   )}
                 </div>
               </div>
               
-              <div className="flex items-center space-x-2 ml-4">
-                <Button
-                  size="sm"
-                  variant={task.status === 'open' ? 'primary' : 'secondary'}
-                  onClick={() => handleStatusChange(task)}
-                >
-                  {task.status === 'open' ? 'Complete' : 'Reopen'}
-                </Button>
-                
-                <Button
-                  size="sm"
-                  variant="secondary"
-                  onClick={() => onEditTask(task.id)}
-                >
-                  Edit
-                </Button>
-                
-                <Button
-                  size="sm"
-                  variant="danger"
-                  onClick={() => handleDelete(task.id)}
-                >
-                  Delete
-                </Button>
+              <div className="mt-4 sm:mt-0 sm:ml-4 sm:flex-shrink-0">
+                <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
+                  <Button
+                    size="sm"
+                    variant={task.status === 'open' ? 'primary' : 'secondary'}
+                    onClick={() => handleStatusChange(task)}
+                    className="w-full sm:w-auto"
+                  >
+                    {task.status === 'open' ? 'Complete' : 'Reopen'}
+                  </Button>
+                  
+                  <Button
+                    size="sm"
+                    variant="secondary"
+                    onClick={() => onEditTask(task.id)}
+                    className="w-full sm:w-auto"
+                  >
+                    Edit
+                  </Button>
+                  
+                  <Button
+                    size="sm"
+                    variant="danger"
+                    onClick={() => handleDelete(task.id)}
+                    className="w-full sm:w-auto"
+                  >
+                    Delete
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
