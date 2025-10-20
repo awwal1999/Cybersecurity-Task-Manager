@@ -1,5 +1,6 @@
 import { Button, LoadingSpinner } from './';
 import { useTasks } from '../hooks';
+import { useToast } from '../hooks';
 import type { Task } from '../types';
 import * as React from "react";
 
@@ -15,16 +16,20 @@ export const TaskList: React.FC<TaskListProps> = ({
   isLoading,
 }) => {
   const { markComplete, reopen, deleteTask } = useTasks();
+  const { showSuccess, showError } = useToast();
 
   const handleStatusChange = async (task: Task) => {
     try {
       if (task.status === 'open') {
         await markComplete(task.id);
+        showSuccess('Task Completed', 'Task has been marked as completed.');
       } else {
         await reopen(task.id);
+        showSuccess('Task Reopened', 'Task has been reopened.');
       }
     } catch (error) {
-      console.error('Failed to update task status:', error);
+      const errorMessage = error instanceof Error ? error.message : 'Failed to update task status';
+      showError('Error', errorMessage);
     }
   };
 
@@ -32,8 +37,10 @@ export const TaskList: React.FC<TaskListProps> = ({
     if (window.confirm('Are you sure you want to delete this task?')) {
       try {
         await deleteTask(taskId);
+        showSuccess('Task Deleted', 'Task has been deleted successfully.');
       } catch (error) {
-        console.error('Failed to delete task:', error);
+        const errorMessage = error instanceof Error ? error.message : 'Failed to delete task';
+        showError('Error', errorMessage);
       }
     }
   };

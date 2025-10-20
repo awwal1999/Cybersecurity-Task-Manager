@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Modal, Button, Input } from './';
 import { useTasks } from '../hooks';
+import { useToast } from '../hooks';
 import { CreateTaskSchema, UpdateTaskSchema, type CreateTaskFormData, type UpdateTaskFormData } from '../schemas';
 import * as React from "react";
 
@@ -19,6 +20,7 @@ export const TaskForm: React.FC<TaskFormProps> = ({
 }) => {
   const [isLoading, setIsLoading] = useState(false);
   const { tasks, createTask, updateTask } = useTasks();
+  const { showSuccess, showError } = useToast();
   
   const isEditing = !!taskId;
   const task = isEditing ? tasks.find(t => t.id === taskId) : null;
@@ -57,14 +59,16 @@ export const TaskForm: React.FC<TaskFormProps> = ({
     try {
       if (isEditing && taskId) {
         await updateTask(taskId, data as UpdateTaskFormData);
+        showSuccess('Task Updated', 'Your task has been updated successfully.');
       } else {
         await createTask(data as CreateTaskFormData);
+        showSuccess('Task Created', 'Your new task has been created successfully.');
       }
       onSuccess();
     } catch (error) {
-      setError('root', {
-        message: error instanceof Error ? error.message : 'Failed to save task',
-      });
+      const errorMessage = error instanceof Error ? error.message : 'Failed to save task';
+      setError('root', { message: errorMessage });
+      showError('Error', errorMessage);
     } finally {
       setIsLoading(false);
     }

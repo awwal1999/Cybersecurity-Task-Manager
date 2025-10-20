@@ -1,13 +1,15 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { AuthProvider, TasksProvider } from './contexts';
-import { ProtectedRoute, PublicRoute, Layout } from './components';
+import { AuthProvider, TasksProvider, ToastProvider } from './contexts';
+import { ProtectedRoute, PublicRoute, Layout, ErrorBoundary } from './components';
 import { LoginPage, RegisterPage, DashboardPage } from './pages';
 
 function App() {
   return (
-    <AuthProvider>
-      <TasksProvider>
-        <Router>
+    <ErrorBoundary>
+      <ToastProvider>
+        <AuthProvider>
+          <TasksProvider>
+            <Router>
           <Routes>
             {/* Public Routes */}
             <Route
@@ -61,9 +63,11 @@ function App() {
               }
             />
           </Routes>
-        </Router>
-      </TasksProvider>
-    </AuthProvider>
+            </Router>
+          </TasksProvider>
+        </AuthProvider>
+      </ToastProvider>
+    </ErrorBoundary>
   );
 }
 
