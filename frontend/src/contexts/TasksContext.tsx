@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from 'react';
+import { useState, useCallback, type ReactNode } from 'react';
 import { tasksApi } from '../api';
 import { TasksContext, type TasksContextType } from './TasksContext';
 import type { Task, CreateTaskFormData, UpdateTaskFormData, TaskFilters } from '../types';
@@ -12,11 +12,11 @@ export const TasksProvider: React.FC<TasksProviderProps> = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const clearError = (): void => {
+  const clearError = useCallback((): void => {
     setError(null);
-  };
+  }, []);
 
-  const fetchTasks = async (filters?: TaskFilters, page: number = 1): Promise<void> => {
+  const fetchTasks = useCallback(async (filters?: TaskFilters, page: number = 1): Promise<void> => {
     try {
       setIsLoading(true);
       setError(null);
@@ -27,9 +27,9 @@ export const TasksProvider: React.FC<TasksProviderProps> = ({ children }) => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, []);
 
-  const createTask = async (data: CreateTaskFormData): Promise<void> => {
+  const createTask = useCallback(async (data: CreateTaskFormData): Promise<void> => {
     try {
       setIsLoading(true);
       setError(null);
@@ -41,9 +41,9 @@ export const TasksProvider: React.FC<TasksProviderProps> = ({ children }) => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, []);
 
-  const updateTask = async (id: number, data: UpdateTaskFormData): Promise<void> => {
+  const updateTask = useCallback(async (id: number, data: UpdateTaskFormData): Promise<void> => {
     try {
       setIsLoading(true);
       setError(null);
@@ -55,9 +55,9 @@ export const TasksProvider: React.FC<TasksProviderProps> = ({ children }) => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, []);
 
-  const deleteTask = async (id: number): Promise<void> => {
+  const deleteTask = useCallback(async (id: number): Promise<void> => {
     try {
       setIsLoading(true);
       setError(null);
@@ -69,9 +69,9 @@ export const TasksProvider: React.FC<TasksProviderProps> = ({ children }) => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, []);
 
-  const markComplete = async (id: number): Promise<void> => {
+  const markComplete = useCallback(async (id: number): Promise<void> => {
     try {
       setIsLoading(true);
       setError(null);
@@ -85,9 +85,9 @@ export const TasksProvider: React.FC<TasksProviderProps> = ({ children }) => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, []);
 
-  const reopen = async (id: number): Promise<void> => {
+  const reopen = useCallback(async (id: number): Promise<void> => {
     try {
       setIsLoading(true);
       setError(null);
@@ -101,7 +101,7 @@ export const TasksProvider: React.FC<TasksProviderProps> = ({ children }) => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, []);
 
   const value: TasksContextType = {
     tasks,

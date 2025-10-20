@@ -19,7 +19,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       const response = await authApi.login(data);
       
       // Store token
-      tokenManager.setToken(response.data.token);
+      tokenManager.setToken(response.data.authorization.token);
       
       // Set user data
       setUser(response.data.user);
@@ -37,7 +37,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       const response = await authApi.register(data);
       
       // Store token
-      tokenManager.setToken(response.data.token);
+      tokenManager.setToken(response.data.authorization.token);
       
       // Set user data
       setUser(response.data.user);
@@ -62,7 +62,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         try {
           // Verify token and get user data
           const response = await authApi.me();
-          setUser(response.data);
+          setUser(response.data.user);
         } catch {
           // Token is invalid, clear it
           tokenManager.clearToken();

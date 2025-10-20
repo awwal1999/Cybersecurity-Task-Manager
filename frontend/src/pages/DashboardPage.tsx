@@ -31,6 +31,7 @@ export const DashboardPage: React.FC = () => {
   const handleCloseTaskForm = () => {
     setShowTaskForm(false);
     setEditingTask(null);
+    fetchTasks(filters); // Refresh tasks after form submission
   };
 
   const handleFiltersChange = (newFilters: TaskFiltersType) => {
