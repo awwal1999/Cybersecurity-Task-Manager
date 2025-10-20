@@ -26,11 +26,19 @@ class Task extends Model
         'user_id',
     ];
 
-    protected $casts = [
-        'status' => TaskStatus::class,
-        'due_date' => 'date',
-        'completed_at' => 'datetime',
-    ];
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'status' => TaskStatus::class,
+            'due_date' => 'date',
+            'completed_at' => 'datetime',
+        ];
+    }
 
     /**
      * Get the user that owns the task.
