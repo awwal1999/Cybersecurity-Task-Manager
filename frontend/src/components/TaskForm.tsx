@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Modal, Button, Input } from './';
 import { useTasks } from '../hooks';
-import { CreateTaskSchema, UpdateTaskSchema } from '../schemas';
+import { CreateTaskSchema, UpdateTaskSchema, type CreateTaskFormData, type UpdateTaskFormData } from '../schemas';
 import * as React from "react";
 
 interface TaskFormProps {
@@ -52,13 +52,13 @@ export const TaskForm: React.FC<TaskFormProps> = ({
     }
   }, [isEditing, task, reset]);
 
-  const onSubmit = async (data: unknown) => {
+  const onSubmit = async (data: Record<string, unknown>) => {
     setIsLoading(true);
     try {
       if (isEditing && taskId) {
-        await updateTask(taskId, data);
+        await updateTask(taskId, data as UpdateTaskFormData);
       } else {
-        await createTask(data);
+        await createTask(data as CreateTaskFormData);
       }
       onSuccess();
     } catch (error) {

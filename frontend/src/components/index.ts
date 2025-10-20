@@ -5,3 +5,7 @@ export { LoadingSpinner } from './LoadingSpinner';
 export { TaskList } from './TaskList';
 export { TaskForm } from './TaskForm';
 export { TaskFilters } from './TaskFilters';
+export { Navigation } from './Navigation';
+export { ProtectedRoute } from './ProtectedRoute';
+export { PublicRoute } from './PublicRoute';
+export { Layout } from './Layout';

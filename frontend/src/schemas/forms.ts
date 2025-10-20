@@ -14,13 +14,11 @@ export const CreateTaskSchema = z.object({
   description: z
     .string()
     .optional()
-    .nullable()
-    .transform((val) => val || null),
+    .transform((val) => val || undefined),
   status: z.enum(['open', 'closed']).optional().default('open'),
   due_date: z
     .string()
     .optional()
-    .nullable()
     .refine(
       (val) => {
         if (!val) return true;
@@ -33,7 +31,7 @@ export const CreateTaskSchema = z.object({
         message: 'Due date must be today or in the future',
       }
     )
-    .transform((val) => val || null),
+    .transform((val) => val || undefined),
 });
 
 // Update Task Schema
@@ -47,13 +45,11 @@ export const UpdateTaskSchema = z.object({
   description: z
     .string()
     .optional()
-    .nullable()
-    .transform((val) => val || null),
+    .transform((val) => val || undefined),
   status: z.enum(['open', 'closed']).optional(),
   due_date: z
     .string()
     .optional()
-    .nullable()
     .refine(
       (val) => {
         if (!val) return true;
@@ -64,7 +60,7 @@ export const UpdateTaskSchema = z.object({
         message: 'Please enter a valid date',
       }
     )
-    .transform((val) => val || null),
+    .transform((val) => val || undefined),
 });
 
 // Login Schema
